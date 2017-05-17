@@ -8,7 +8,8 @@ class App extends Component {
     super(props);
     this.state = {
       title: '',
-      body: ''
+      body: '',
+      image: null
     }
   }
 
@@ -23,7 +24,7 @@ class App extends Component {
   }
 
   render() {
-    const { title, body } = this.state
+    const { title, body, image } = this.state
     return (
       <div className="App">
         <div className="App-header">
@@ -33,6 +34,7 @@ class App extends Component {
         <button onClick={()=>this.getRandomArticle()}>Random article</button>
         <h1>{title}</h1>
         <p>{body}</p>
+        <img src={image} alt={image} />
       </div>
     );
   }
