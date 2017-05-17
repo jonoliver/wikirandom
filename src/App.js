@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+import get from './Request.js'
 import logo from './logo.svg';
 import './App.css';
-
-// fetch("https://en.wikipedia.org/w/api.php?origin=*&action=query&generator=random&grnnamespace=0&prop=extracts&exchars=500&format=json").then(function(r){return r.json()}).then(function(data){
-// const article = data.query.pages[Object.keys(data.query.pages)[0]];
-// console.log(article.extract)
-// })
 
 class App extends Component {
   constructor(props){
@@ -22,23 +17,11 @@ class App extends Component {
   }
 
   getRandomArticle(){
-    $.getJSON("http://en.wikipedia.org/w/api.php?action=query&generator=random&grnnamespace=0&prop=extracts|images|links&pllimit=5000&format=json&callback=?", (data) => {
-        const article = data.query.pages[Object.keys(data.query.pages)[0]];
-        const body = $(article.extract).first().text();
-        // console.log(data);
-        // console.log(article);
-        console.log(article.title)
-        console.log(article.images[0])
-        // TODO: 'can mean:''
-        if (body === '' || body.indexOf('refer to:') > 0){
-          console.log('no body')
-          this.getRandomArticle();
-          return;
-        }
-        this.setState({
-          title: article.title,
-          body: body
-        });
+    get((response) => {
+      this.setState({
+        title: response.title,
+        body: response.body
+      });
     });
   }
 
