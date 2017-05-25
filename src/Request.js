@@ -33,7 +33,7 @@ function parseJson(json, f) {
 }
 
 function parseArticle(page){
-  const body = $(page.extract).first().text();
+  const body = $(page.extract).text();
   const image = getArticleImg(page);
   return {
     pageid: page.pageid,
