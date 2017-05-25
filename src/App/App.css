@@ -28,3 +28,19 @@ main {
   margin: auto;
   padding: 0 20px;
 }
+
+#fetch_articles {
+  background: aliceblue;
+  color: #4a7dab;
+  border: 1px solid #bbc1c7;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+}
+
+#fetch_articles:hover {
+  background: #f7fbff;
+}

@@ -28,7 +28,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>WikiRandom</h2>
         </div>
-        <button onClick={()=>this.getRandomArticle()}>Random article</button>
+        <button id='fetch_articles' onClick={()=>this.getRandomArticle()}>Fetch me some articles!</button>
         <main>
         { articles.map(article =>
           <Article key={article.pageid} article={article} />
