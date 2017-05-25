@@ -1,8 +1,6 @@
-React app to fetch a a list of random [Wikipedia](https://www.wikipedia.org/) articles.
+React app to fetch a a list of random [Wikipedia](https://www.wikipedia.org/) articles. [Try it out!](https://jonoliver.github.io/wikirandom)
 
 :book: :eyes: :bulb:
-
-[Try it out!](https://jonoliver.github.io/wikirandom)
 
 #### Install
 ```
