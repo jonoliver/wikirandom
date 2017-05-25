@@ -18,18 +18,19 @@ const params = $.param({
 
 const URL = `http://en.wikipedia.org/w/api.php?${params}`;
 
-const get = (f) =>
+const get = (callback) =>
   fetch(URL)
     .then((response) => response.json())
-    .then((json) => parseJson(json, f))
+    .then(parseJson)
+    .then(callback);
 
-function parseJson(json, f) {
+function parseJson(json) {
   const { pages } = json.query;
   const keys = Object.keys(pages);
   const articles = keys
     .map((key) => parseArticle(pages[key]))
     .filter(isEmpty);
-  f(articles);
+  return articles;
 }
 
 function parseArticle(page){
