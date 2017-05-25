@@ -2,6 +2,7 @@
   "name": "wikicrawl",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://jonoliver.github.io/wikirandom",
   "dependencies": {
     "enzyme": "^2.8.2",
     "jquery": "^3.2.1",
