@@ -1,7 +1,10 @@
 exports[`test snapshots 1`] = `
 <article>
   <h1>
-    A title
+    <a
+      href="article_url">
+      A title
+    </a>
   </h1>
   <p>
     A body

@@ -8,6 +8,7 @@ const div = document.createElement('div');
 
 const article = {
   title: 'A title',
+  url: 'article_url',
   body: 'A body',
   image: 'image.jpg'
 }

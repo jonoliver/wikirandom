@@ -3,7 +3,15 @@ article {
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
-
+article a {
+  color: #3a3a3a;
+}
+article a:visited {
+  color: #999;
+}
+article a:hover {
+  color: #777;
+}
 article p {
   text-align: left;
 }

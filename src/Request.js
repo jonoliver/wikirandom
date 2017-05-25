@@ -11,7 +11,8 @@ const params = $.param({
   exlimit: "max",
   exintro: "",
   grnnamespace: "0",
-  prop: "extracts|images|pageimages|links",
+  prop: "extracts|images|pageimages|links|info",
+  inprop: "url",
   pllimit: "5000",
   format: "json",
 });
@@ -39,6 +40,7 @@ function parseArticle(page){
   return {
     pageid: page.pageid,
     title: page.title,
+    url: page.fullurl,
     image: image,
     body: body
   }
