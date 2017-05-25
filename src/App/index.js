@@ -29,9 +29,11 @@ class App extends Component {
           <h2>WikiRandom</h2>
         </div>
         <button onClick={()=>this.getRandomArticle()}>Random article</button>
+        <main>
         { articles.map(article =>
           <Article key={article.pageid} article={article} />
         )}
+        </main>
       </div>
     );
   }
