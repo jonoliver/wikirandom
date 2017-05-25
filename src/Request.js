@@ -1,7 +1,19 @@
 import $ from 'jquery';
 import MD5 from 'md5-es';
 
-const URL = `http://en.wikipedia.org/w/api.php?origin=*&action=query&generator=random&grnlimit=1&gexlimit=max&grnnamespace=0&prop=extracts|images|pageimages|links&pllimit=5000&format=json`;
+const params = $.param({
+  origin: "*",
+  action: "query",
+  generator: "random",
+  grnlimit: "1",
+  gexlimit: "max",
+  grnnamespace: "0",
+  prop: "extracts|images|pageimages|links",
+  pllimit: "5000",
+  format: "json",
+});
+
+const URL = `http://en.wikipedia.org/w/api.php?${params}`;
 
 const get = (f) =>
   fetch(URL)
