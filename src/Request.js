@@ -1,11 +1,28 @@
 import $ from 'jquery';
 import MD5 from 'md5-es';
-const URL = "http://en.wikipedia.org/w/api.php?action=query&generator=random&grnnamespace=0&prop=extracts|images|links&pllimit=5000&format=json&callback=?";
+const URL = "http://en.wikipedia.org/w/api.php?origin=*&action=query&generator=random&grnnamespace=0&prop=extracts|images|links&pllimit=5000&format=json";
 
-// fetch("https://en.wikipedia.org/w/api.php?origin=*&action=query&generator=random&grnnamespace=0&prop=extracts&exchars=500&format=json").then(function(r){return r.json()}).then(function(data){
-// const article = data.query.pages[Object.keys(data.query.pages)[0]];
-// console.log(article.extract)
-// })
+const get = (f) =>
+  fetch(URL)
+    .then((response) => response.json())
+    .then((json) => parseJson(json, f))
+
+function parseJson(json, f) {
+  const article = json.query.pages[Object.keys(json.query.pages)[0]];
+  const body = $(article.extract).first().text();
+  const image = getArticleImg(article);
+  console.log(article);
+  // TODO: 'can mean:''
+  if (body === '' || body.indexOf('refer to:') > 0){
+    console.log('no body')
+    return get(f);
+  }
+  f({
+    title: article.title,
+    image: image,
+    body: body
+  });
+}
 
 function getArticleImg(article) {
   if (article.images && article.images[0].title) {
@@ -23,24 +40,5 @@ function getArticleImg(article) {
   }
   return null;
 }
-
-const get = (f) =>
-  $.getJSON(URL, (data) => {
-    const article = data.query.pages[Object.keys(data.query.pages)[0]];
-    const body = $(article.extract).first().text();
-    const image = getArticleImg(article);
-    console.log(article);
-    // TODO: 'can mean:''
-    if (body === '' || body.indexOf('refer to:') > 0){
-      console.log('no body')
-      get(f);
-      return;
-    }
-    f({
-      title: article.title,
-      image: image,
-      body: body
-    });
-  });
 
 export default get;
