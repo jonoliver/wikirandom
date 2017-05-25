@@ -1,12 +1,15 @@
 import $ from 'jquery';
 import MD5 from 'md5-es';
 
+const NUM_PAGES = 1;
+
 const params = $.param({
   origin: "*",
   action: "query",
   generator: "random",
-  grnlimit: "1",
-  gexlimit: "max",
+  grnlimit: NUM_PAGES,
+  exlimit: "max",
+  exintro: "",
   grnnamespace: "0",
   prop: "extracts|images|pageimages|links",
   pllimit: "5000",
