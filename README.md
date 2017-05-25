@@ -2,6 +2,8 @@ React app to fetch a a list of random [Wikipedia](https://www.wikipedia.org/) ar
 
 :book: :eyes: :bulb:
 
+[Try it out!](https://jonoliver.github.io/wikirandom)
+
 #### Install
 ```
 git clone git@github.com:jonoliver/wikirandom.git
