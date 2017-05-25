@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import MD5 from 'md5-es';
-const URL = "http://en.wikipedia.org/w/api.php?origin=*&action=query&generator=random&grnnamespace=0&prop=extracts|images|links&pllimit=5000&format=json";
+
+const URL = `http://en.wikipedia.org/w/api.php?origin=*&action=query&generator=random&grnlimit=1&gexlimit=max&grnnamespace=0&prop=extracts|images|pageimages|links&pllimit=5000&format=json`;
 
 const get = (f) =>
   fetch(URL)
@@ -8,27 +9,31 @@ const get = (f) =>
     .then((json) => parseJson(json, f))
 
 function parseJson(json, f) {
-  const article = json.query.pages[Object.keys(json.query.pages)[0]];
-  const body = $(article.extract).first().text();
-  const image = getArticleImg(article);
-  console.log(article);
-  // TODO: 'can mean:''
+  const page = json.query.pages[Object.keys(json.query.pages)[0]];
+  const article = parseArticle(page);
+  const { body } = article;
   if (body === '' || body.indexOf('refer to:') > 0){
     console.log('no body')
     return get(f);
   }
-  f([{
-    pageid: article.pageid,
-    title: article.title,
+  f([article]);
+}
+
+function parseArticle(page){
+  const body = $(page.extract).first().text();
+  const image = getArticleImg(page);
+  return {
+    pageid: page.pageid,
+    title: page.title,
     image: image,
     body: body
-  }]);
+  }
 }
 
 function getArticleImg(article) {
   if (article.images && article.images[0].title) {
     // const fileName = "Killerwhales jumping.jpg"
-    console.log(article.images[0]);
+    // console.log(article.images[0]);
     const fileName = article.images[0].title.replace(/^File:/, '').replace(/\s/g,'_');
     const hash = MD5.hash(fileName);
     const char0 = hash[0];
