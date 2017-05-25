@@ -24,8 +24,10 @@ const get = (f) =>
     .then((json) => parseJson(json, f))
 
 function parseJson(json, f) {
-  const page = json.query.pages[Object.keys(json.query.pages)[0]];
-  const article = parseArticle(page);
+  const { pages } = json.query;
+  const keys = Object.keys(pages);
+  const articles = keys.map((key) => parseArticle(pages[key]));
+  const [article] = articles;
   const { body } = article;
   if (body === '' || body.indexOf('refer to:') > 0){
     console.log('no body')
