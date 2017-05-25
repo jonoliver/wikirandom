@@ -16,10 +16,11 @@ it('makes the initial wiki request', () => {
   expect(Request.default).toBeCalled();
 });
 
-it('contains an Article', () => {
-  const article = { title: 'A title' }
+it('contains a list of Articles', () => {
+  const articles = [{ pageid: 1, title: 'Title 1' }, { pageid: 2, title: 'Title 2' }]
   const element = mount(<App />)
-  element.setState({article: article})
-  expect(element.find('article').length).toBe(1);
-  expect(element.find('article h1').text()).toBe('A title');
+  element.setState({articles: articles})
+  expect(element.find('article').length).toBe(2);
+  expect(element.find('article').first().find('h1').text()).toBe('Title 1');
+  expect(element.find('article').last().find('h1').text()).toBe('Title 2');
 });

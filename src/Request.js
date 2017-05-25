@@ -17,11 +17,12 @@ function parseJson(json, f) {
     console.log('no body')
     return get(f);
   }
-  f({
+  f([{
+    pageid: article.pageid,
     title: article.title,
     image: image,
     body: body
-  });
+  }]);
 }
 
 function getArticleImg(article) {

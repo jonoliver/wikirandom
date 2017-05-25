@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      article: {}
+      articles: []
     }
   }
 
@@ -17,11 +17,11 @@ class App extends Component {
   }
 
   getRandomArticle(){
-    get((response) => this.setState({ article: response }));
+    get((response) => this.setState({ articles: response }));
   }
 
   render() {
-    const { article } = this.state
+    const { articles } = this.state
     return (
       <div className="App">
         <div className="App-header">
@@ -29,7 +29,9 @@ class App extends Component {
           <h2>WikiRandom</h2>
         </div>
         <button onClick={()=>this.getRandomArticle()}>Random article</button>
-        <Article article={article} />
+        { articles.map(article =>
+          <Article key={article.pageid} article={article} />
+        )}
       </div>
     );
   }
