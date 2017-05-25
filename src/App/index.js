@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Article from '../Article';
 import get from '../Request.js'
 import logo from '../logo.svg';
 import './index.css';
@@ -30,9 +31,7 @@ class App extends Component {
           <h2>WikiRandom</h2>
         </div>
         <button onClick={()=>this.getRandomArticle()}>Random article</button>
-        <h1>{title}</h1>
-        <p>{body}</p>
-        <img src={image} alt={image} />
+        <Article title={title} body={body} image={image} />
       </div>
     );
   }
