@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import MD5 from 'md5-es';
+import getArticleImg from './image'
 
 const NUM_PAGES = 10;
 
@@ -44,23 +44,6 @@ function parseArticle(page){
     image: image,
     body: body
   }
-}
-
-function getArticleImg(article) {
-  if (article.images && article.images[0].title) {
-    // const fileName = "Killerwhales jumping.jpg"
-    // console.log(article.images[0]);
-    const fileName = article.images[0].title.replace(/^File:/, '').replace(/\s/g,'_');
-    const hash = MD5.hash(fileName);
-    const char0 = hash[0];
-    const char1 = hash[1];
-    // Thumbnail
-    // 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Killerwhales_jumping.jpg/1920px-Killerwhales_jumping.jpg'
-    // TODO: Handle files not in /commons:
-    //upload.wikimedia.org/wikipedia/en/6/61/Lord_of_the_Rings_Game_One.jpg
-    return `https://upload.wikimedia.org/wikipedia/commons/${char0}/${char0}${char1}/${fileName}`;
-  }
-  return null;
 }
 
 function isEmpty(article) {
