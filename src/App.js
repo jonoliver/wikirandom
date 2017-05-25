@@ -18,9 +18,7 @@ class App extends Component {
   }
 
   getRandomArticle(){
-    get((response) => {
-      this.setState(response);
-    });
+    get((response) => this.setState(response));
   }
 
   render() {
