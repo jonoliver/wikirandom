@@ -23,4 +23,6 @@ yarn test
 yarn build
 ```
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+[View TODO list](TODO.md)
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). [View information](create_react_app.md)
