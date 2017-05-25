@@ -1,28 +1,8 @@
 import MD5 from 'md5-es';
 
 function getArticleImg(article) {
-  if (article.images) {
-    const images = article.images.filter((image) => {
-      // File:Wikisource-logo.svg
-      // File:Edit-clear.svg
-      // File:Gnome-dev-cdrom-audio.svg
-      // File:Star full.svg
-      // File:Star half.svg
-      // File:Ambox important.svg
-      // File:Creatorballoon.png
-      // File:Commons-logo.svg
-      // File:Wikispecies-logo.svg
-      // File:Crystal Clear app Login Manager 2.png
-      // File:Musical notes.svg
-      // File:Lock-green.svg
-      // Use File:Flag only as last resort
-
-      const val = image.title !== "File:Commons-logo.svg"
-      if (val) console.log(`filtered image for ${article.title}`);
-      return val;
-    });
-    // const fileName = "Killerwhales jumping.jpg"
-    // console.log(article.images[0]);
+  const images = article.images && filterImages(article.images);
+  if (images && images.length > 0) {
     const fileName = images[0].title.replace(/^File:/, '').replace(/\s/g,'_');
     const hash = MD5.hash(fileName);
     const char0 = hash[0];
@@ -35,6 +15,28 @@ function getArticleImg(article) {
     return `https://upload.wikimedia.org/wikipedia/commons/${char0}/${char0}${char1}/${fileName}`;
   }
   return null;
+}
+
+function filterImages(images) {
+  const blackList = [
+    "File:Commons-logo.svg",
+    "File:Wikisource-logo.svg",
+    "File:Edit-clear.svg",
+    "File:Gnome-dev-cdrom-audio.svg",
+    "File:Star full.svg",
+    "File:Star half.svg",
+    "File:Ambox important.svg",
+    "File:Creatorballoon.png",
+    "File:Commons-logo.svg",
+    "File:Wikispecies-logo.svg",
+    "File:Crystal Clear app Login Manager 2.png",
+    "File:Musical notes.svg",
+    "File:Lock-green.svg",
+    "File:Disambig gray.svg",
+    "File:Arrow Blue LowerLeft 001.svg"
+  ];
+  // Use File:Flag only as last resort
+  return images.filter((image) => !blackList.includes(image.title));
 }
 
 export default getArticleImg;
