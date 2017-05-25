@@ -15,7 +15,6 @@
 ## Build :wrench:
 
 - Configure webpack :rage: :hurtrealbad: :trollface:
-- Add github pages build
 
 ## Bugs :bug: :bug: :bug:
 #### Images
