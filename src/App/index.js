@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Article from '../Article';
-import get from '../Request.js'
+import get from '../Request'
 import logo from '../logo.svg';
 import './index.css';
 
