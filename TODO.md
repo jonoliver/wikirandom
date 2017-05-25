@@ -2,7 +2,6 @@
 
 ## Functional :electric_plug:
 
-- Add article links
 - Add loading icon
 - Add option to recursively crawl page links
 
