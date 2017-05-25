@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import MD5 from 'md5-es';
 
-const NUM_PAGES = 1;
+const NUM_PAGES = 10;
 
 const params = $.param({
   origin: "*",
@@ -26,14 +26,10 @@ const get = (f) =>
 function parseJson(json, f) {
   const { pages } = json.query;
   const keys = Object.keys(pages);
-  const articles = keys.map((key) => parseArticle(pages[key]));
-  const [article] = articles;
-  const { body } = article;
-  if (body === '' || body.indexOf('refer to:') > 0){
-    console.log('no body')
-    return get(f);
-  }
-  f([article]);
+  const articles = keys
+    .map((key) => parseArticle(pages[key]))
+    .filter(isEmpty);
+  f(articles);
 }
 
 function parseArticle(page){
@@ -62,6 +58,15 @@ function getArticleImg(article) {
     return `https://upload.wikimedia.org/wikipedia/commons/${char0}/${char0}${char1}/${fileName}`;
   }
   return null;
+}
+
+function isEmpty(article) {
+  const { body } = article;
+  if (body === '' || body.indexOf('refer to:') > 0){
+    console.log('no body')
+    return false;
+  }
+  return true;
 }
 
 export default get;
