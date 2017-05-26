@@ -1,6 +1,9 @@
 import MD5 from 'md5-es';
 
 function getArticleImg(page) {
+  if(page.pageimage){
+    return buildImgUrl(page.pageimage);
+  }
   const images = page.images && filterImages(page.images);
   if (images && images.length > 0) {
     return buildImgUrl(images[0].title);

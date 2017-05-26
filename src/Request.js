@@ -11,10 +11,11 @@ const params = $.param({
   exlimit: "max",
   exintro: "",
   grnnamespace: "0",
-  prop: "extracts|images|pageimages|links|info",
+  prop: "extracts|images|pageimages|pageterms|links|info",
   inprop: "url",
   pllimit: "5000",
   format: "json",
+  formatversion: "2",
 });
 
 const URL = `http://en.wikipedia.org/w/api.php?${params}`;
