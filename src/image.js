@@ -1,7 +1,7 @@
 import MD5 from 'md5-es';
 
-function getArticleImg(article) {
-  const images = article.images && filterImages(article.images);
+function getArticleImg(page) {
+  const images = page.images && filterImages(page.images);
   if (images && images.length > 0) {
     const fileName = images[0].title.replace(/^File:/, '').replace(/\s/g,'_');
     const hash = MD5.hash(fileName);
