@@ -3,18 +3,22 @@ import MD5 from 'md5-es';
 function getArticleImg(page) {
   const images = page.images && filterImages(page.images);
   if (images && images.length > 0) {
-    const fileName = images[0].title.replace(/^File:/, '').replace(/\s/g,'_');
-    const hash = MD5.hash(fileName);
-    const char0 = hash[0];
-    const char1 = hash[1];
-    // Thumbnail
-    // 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Killerwhales_jumping.jpg/1920px-Killerwhales_jumping.jpg'
-    // TODO: Handle files not in /commons:
-    //upload.wikimedia.org/wikipedia/en/6/61/Lord_of_the_Rings_Game_One.jpg
-    // TODO: filter out File:Commons-logo.svg
-    return `https://upload.wikimedia.org/wikipedia/commons/${char0}/${char0}${char1}/${fileName}`;
+    return buildImgUrl(images[0].title);
   }
   return null;
+}
+
+function buildImgUrl(imgTitle) {
+  const fileName = imgTitle.replace(/^File:/, '').replace(/\s/g,'_');
+  const hash = MD5.hash(fileName);
+  const char0 = hash[0];
+  const char1 = hash[1];
+  // Thumbnail
+  // 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Killerwhales_jumping.jpg/1920px-Killerwhales_jumping.jpg'
+  // TODO: Handle files not in /commons:
+  //upload.wikimedia.org/wikipedia/en/6/61/Lord_of_the_Rings_Game_One.jpg
+  // TODO: filter out File:Commons-logo.svg
+  return `https://upload.wikimedia.org/wikipedia/commons/${char0}/${char0}${char1}/${fileName}`;
 }
 
 function filterImages(images) {
