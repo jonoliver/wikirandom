@@ -10,7 +10,8 @@ exports[`test snapshots 1`] = `
     A body
   </p>
   <img
-    alt="image.jpg"
+    alt="A title"
+    onError={[Function]}
     src="image.jpg" />
 </article>
 `;
