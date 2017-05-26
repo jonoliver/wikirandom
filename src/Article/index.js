@@ -7,7 +7,9 @@ const Article = ({article}) => {
     <article>
       <h1><a href={url}>{title}</a></h1>
       <p>{body}</p>
-      <img src={image} alt={image} />
+      { image &&
+        <img src={image} alt={title} onError={(e) => e.target.style.display='none'} />
+      }
     </article>
   )
 }
