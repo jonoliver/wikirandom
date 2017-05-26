@@ -37,7 +37,11 @@ function filterImages(images) {
     "File:Musical notes.svg",
     "File:Lock-green.svg",
     "File:Disambig gray.svg",
-    "File:Arrow Blue LowerLeft 001.svg"
+    "File:Arrow Blue LowerLeft 001.svg",
+    "File:Folder Hexagonal Icon.svg",
+    "File:Wikiquote-logo.svg",
+    "File:Red Pencil Icon.png",
+    "File:PD-icon.svg"
   ];
   // Use File:Flag only as last resort
   return images.filter((image) => !blackList.includes(image.title));
