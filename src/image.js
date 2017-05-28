@@ -47,7 +47,7 @@ function filterImages(images) {
     "File:Folder Hexagonal Icon.svg",
     "File:Wikiquote-logo.svg",
     "File:Red Pencil Icon.png",
-    "File:Blue_pencil.svg",
+    "File:Blue pencil.svg",
     "File:PD-icon.svg",
     "File:Question book-new.svg",
     "File:Wiki letter w cropped.svg"
