@@ -20,11 +20,10 @@ const params = $.param({
 
 const URL = `http://en.wikipedia.org/w/api.php?${params}`;
 
-const get = (callback) =>
+const get = () =>
   fetch(URL)
     .then((response) => response.json())
-    .then(parseJson)
-    .then(callback);
+    .then(parseJson);
 
 function parseJson(json) {
   const { pages } = json.query;

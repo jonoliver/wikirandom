@@ -20,8 +20,9 @@ class App extends Component {
   getRandomArticles(){
     this.setState({loading: true});
     const { articles } = this.state
-
-    get((response) => this.setState({ articles: articles.concat(response), loading: false }));
+    get().then((response) => {
+      this.setState({ articles: articles.concat(response), loading: false });
+    });
   }
 
   render() {
