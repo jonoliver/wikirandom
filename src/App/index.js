@@ -8,7 +8,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      articles: []
+      articles: [],
+      loading: true
     }
   }
 
@@ -17,11 +18,12 @@ class App extends Component {
   }
 
   getRandomArticle(){
-    get((response) => this.setState({ articles: response }));
+    this.setState({loading: true});
+    get((response) => this.setState({ articles: response, loading: false }));
   }
 
   render() {
-    const { articles } = this.state
+    const { articles, loading } = this.state
     return (
       <div className="App">
         <div className="App-header">
@@ -30,8 +32,11 @@ class App extends Component {
         </div>
         <button id='fetch_articles' onClick={()=>this.getRandomArticle()}>Fetch me some articles!</button>
         <main>
-        { articles.map(article =>
-          <Article key={article.pageid} article={article} />
+        {
+          loading ?
+          <div className="loader">Loading...</div> :
+          articles.map(article =>
+            <Article key={article.pageid} article={article} />
         )}
         </main>
       </div>
