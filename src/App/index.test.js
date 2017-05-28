@@ -6,6 +6,11 @@ import * as Request from '../Request';
 
 const div = document.createElement('div');
 Request.default = jest.fn();
+Request.default.mockReturnValue(
+  new Promise((resolve) => {
+    resolve([{ pageid: 1, title: 'Title 1' }, { pageid: 2, title: 'Title 2' }]);
+  })
+);
 
 it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
@@ -47,5 +52,14 @@ describe('articles are loading', () => {
     const element = shallow(<App />);
     element.setState({ loading:true });
     expect(element.find('.fetch-articles').exists()).toBe(false);
+  });
+});
+
+describe('loading new articles', () => {
+  it('appends the new articles', async () => {
+    const element = mount(<App />);
+    element.setState({loading:false});
+    await element.find('.fetch-articles').simulate('click');
+    expect(element.find('article').length).toBe(2);
   });
 });
