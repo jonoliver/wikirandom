@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './index';
-import { mount } from 'enzyme'
+import { mount, shallow } from 'enzyme'
 import * as Request from '../Request';
 
 const div = document.createElement('div');
@@ -18,7 +18,7 @@ it('makes the initial wiki request', () => {
 
 describe('articles have been loaded', () => {
   it('does NOT display a loading message', () => {
-    const element = mount(<App />);
+    const element = shallow(<App />);
     element.setState({ loading:false });
     expect(element.find('.loader').exists()).toBe(false);
   });
@@ -34,7 +34,7 @@ describe('articles have been loaded', () => {
 
 describe('articles have NOT been loaded', () => {
   it('displays a loading message', () => {
-    const element = mount(<App />);
+    const element = shallow(<App />);
     element.setState({ loading:true });
     expect(element.find('.loader').exists()).toBe(true);
   });
