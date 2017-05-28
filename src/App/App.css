@@ -29,7 +29,7 @@ main {
   padding: 0 20px;
 }
 
-#fetch_articles {
+.fetch-articles {
   background: aliceblue;
   color: #4a7dab;
   border: 1px solid #bbc1c7;

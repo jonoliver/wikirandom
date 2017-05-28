@@ -22,6 +22,11 @@ describe('articles have been loaded', () => {
     element.setState({ loading:false });
     expect(element.find('.loader').exists()).toBe(false);
   });
+  it('displays the "More Articles" button', () => {
+    const element = shallow(<App />);
+    element.setState({ loading:false });
+    expect(element.find('.fetch-articles').exists()).toBe(true);
+  });
   it('displays a list of Articles', () => {
     const articles = [{ pageid: 1, title: 'Title 1' }, { pageid: 2, title: 'Title 2' }]
     const element = mount(<App />)
@@ -32,15 +37,15 @@ describe('articles have been loaded', () => {
   });
 });
 
-describe('articles have NOT been loaded', () => {
+describe('articles are loading', () => {
   it('displays a loading message', () => {
     const element = shallow(<App />);
     element.setState({ loading:true });
     expect(element.find('.loader').exists()).toBe(true);
   });
-  it('does NOT display a list of Articles', () => {
-    const element = mount(<App />);
+  it('does NOT display the "More Articles" button', () => {
+    const element = shallow(<App />);
     element.setState({ loading:true });
-    expect(element.find('article').length).toBe(0);
+    expect(element.find('.fetch-articles').exists()).toBe(false);
   });
 });

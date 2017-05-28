@@ -14,12 +14,14 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.getRandomArticle();
+    this.getRandomArticles();
   }
 
-  getRandomArticle(){
+  getRandomArticles(){
     this.setState({loading: true});
-    get((response) => this.setState({ articles: response, loading: false }));
+    const { articles } = this.state
+
+    get((response) => this.setState({ articles: articles.concat(response), loading: false }));
   }
 
   render() {
@@ -30,14 +32,17 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>WikiRandom</h2>
         </div>
-        <button id='fetch_articles' onClick={()=>this.getRandomArticle()}>Fetch me some articles!</button>
         <main>
         {
+          articles.map(article => <Article key={article.pageid} article={article} />)
+        }
+        {
           loading ?
-          <div className="loader">Loading...</div> :
-          articles.map(article =>
-            <Article key={article.pageid} article={article} />
-        )}
+            <div className="loader">Loading...</div> :
+            <button className='fetch-articles' onClick={()=>
+              this.getRandomArticles()}>More Articles
+            </button>
+        }
         </main>
       </div>
     );
