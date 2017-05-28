@@ -50,8 +50,7 @@ function filterImages(images) {
     "File:Blue_pencil.svg",
     "File:PD-icon.svg",
     "File:Question book-new.svg",
-    "File:Wiki letter w cropped.svg",
-    "Blue_pencil.svg"
+    "File:Wiki letter w cropped.svg"
   ];
   // Use File:Flag only as last resort
   return images.filter((image) => !blackList.includes(image.title));
