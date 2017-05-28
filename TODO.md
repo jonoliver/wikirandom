@@ -2,7 +2,6 @@
 
 ## Functional :electric_plug:
 
-- Add loading icon
 - Add option to recursively crawl page links
 - Continue to work on image filter
 
