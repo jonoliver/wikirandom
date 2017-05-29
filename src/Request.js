@@ -1,22 +1,19 @@
 import $ from 'jquery';
 import getArticleImg from './image'
 
-const DEFAULT_URL = buildUrl();
-
-const get = (url = DEFAULT_URL) =>
-  fetch(url)
+const get = (searchTerm) =>
+  fetch(buildUrl(searchTerm))
     .then((response) => response.json())
     .then(parseJson);
 
 function buildUrl(searchTerm) {
-  const numPages = 10;
+  const numPages = 1;
   const baseUrl = "http://en.wikipedia.org/w/api.php?";
   const baseParams = {
     origin: "*",
     action: "query",
     exlimit: "max",
     exintro: "",
-    grnnamespace: "0",
     prop: "extracts|images|pageimages|pageterms|links|info",
     inprop: "url",
     pllimit: "5000",
@@ -25,7 +22,8 @@ function buildUrl(searchTerm) {
   }
   const randomParams = {
     generator: "random",
-    grnlimit: numPages
+    grnlimit: numPages,
+    grnnamespace: "0"
   }
   const searchParams = { titles: searchTerm }
   const additionalParams = searchTerm ? searchParams : randomParams;
@@ -57,6 +55,14 @@ function parseArticle(page){
 }
 
 function getRandomLink(links = []) {
+  // TODO: handle no body content
+  // TODO: handle no links
+  // TODO: filter duplicate page ids
+  // TODO: filter out prefixes:
+  // Wikipedia:
+  // User:
+  // Category:
+  // Portal:
   links = links.map((link) => link.title);
   return links[Math.floor(Math.random()*links.length)];
 }

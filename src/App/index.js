@@ -17,11 +17,13 @@ class App extends Component {
     this.getRandomArticles();
   }
 
-  getRandomArticles(){
+  getRandomArticles(i=0, searchTerm){
     this.setState({loading: true});
     const { articles } = this.state
-    get().then((response) => {
+    get(searchTerm).then((response) => {
       this.setState({ articles: articles.concat(response), loading: false });
+      console.log(response[0].nextLink);
+      if (i < 10) this.getRandomArticles(++i, response[0].nextLink);
     });
   }
 
