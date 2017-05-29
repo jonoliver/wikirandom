@@ -1,29 +1,37 @@
 import $ from 'jquery';
 import getArticleImg from './image'
 
-const NUM_PAGES = 10;
+const DEFAULT_URL = buildUrl();
 
-const params = $.param({
-  origin: "*",
-  action: "query",
-  generator: "random",
-  grnlimit: NUM_PAGES,
-  exlimit: "max",
-  exintro: "",
-  grnnamespace: "0",
-  prop: "extracts|images|pageimages|pageterms|info",
-  inprop: "url",
-  pllimit: "5000",
-  format: "json",
-  formatversion: "2",
-});
-
-const URL = `http://en.wikipedia.org/w/api.php?${params}`;
-
-const get = () =>
-  fetch(URL)
+const get = (url = DEFAULT_URL) =>
+  fetch(url)
     .then((response) => response.json())
     .then(parseJson);
+
+function buildUrl(searchTerm) {
+  const numPages = 10;
+  const baseUrl = "http://en.wikipedia.org/w/api.php?";
+  const baseParams = {
+    origin: "*",
+    action: "query",
+    exlimit: "max",
+    exintro: "",
+    grnnamespace: "0",
+    prop: "extracts|images|pageimages|pageterms|links|info",
+    inprop: "url",
+    pllimit: "5000",
+    format: "json",
+    formatversion: "2",
+  }
+  const randomParams = {
+    generator: "random",
+    grnlimit: numPages
+  }
+  const searchParams = { titles: searchTerm }
+  const additionalParams = searchTerm ? searchParams : randomParams;
+  const finalParams = $.param($.extend(baseParams, additionalParams));
+  return `${baseUrl}${finalParams}`;
+}
 
 function parseJson(json) {
   const { pages } = json.query;
