@@ -45,13 +45,20 @@ function parseJson(json) {
 function parseArticle(page){
   const body = $(page.extract).text();
   const image = getArticleImg(page);
+  const link = getRandomLink(page.links);
   return {
     pageid: page.pageid,
     title: page.title,
     url: page.fullurl,
     image: image,
-    body: body
+    body: body,
+    nextLink: link
   }
+}
+
+function getRandomLink(links = []) {
+  links = links.map((link) => link.title);
+  return links[Math.floor(Math.random()*links.length)];
 }
 
 function isEmpty(article) {
