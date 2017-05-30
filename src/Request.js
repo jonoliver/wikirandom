@@ -41,17 +41,12 @@ function parseJson(json) {
 }
 
 function parseArticle(page){
+  const { pageid , title } = page;
+  const url = page.fullurl;
   const body = $(page.extract).text();
   const image = getArticleImg(page);
-  const link = getRandomLink(page.links);
-  return {
-    pageid: page.pageid,
-    title: page.title,
-    url: page.fullurl,
-    image: image,
-    body: body,
-    nextLink: link
-  }
+  const nextLink = getRandomLink(page.links);
+  return { pageid, title, image, body, url, nextLink }
 }
 
 function getRandomLink(links = []) {
