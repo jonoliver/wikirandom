@@ -35,15 +35,11 @@ function parseJson(json) {
 }
 
 function parseArticle(page){
+  const { pageid , title } = page;
+  const url = page.fullurl;
   const body = $(page.extract).text();
   const image = getArticleImg(page);
-  return {
-    pageid: page.pageid,
-    title: page.title,
-    url: page.fullurl,
-    image: image,
-    body: body
-  }
+  return { pageid, title, image, body, url }
 }
 
 function isEmpty(article) {
