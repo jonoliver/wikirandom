@@ -58,6 +58,8 @@ function getRandomLink(links = []) {
   // User:
   // Category:
   // Portal:
+  // Template:
+  // Help:
   links = links.map((link) => link.title);
   return links[Math.floor(Math.random()*links.length)];
 }
